@@ -22,11 +22,10 @@ void setup()
   Serial.println(VERSION);
 
   setup_wifi();
-  client.setServer(mqtt_server, 1883);
+  client.setServer(mqtt_server, MQTT_SUB_PORT);//
   client.setCallback(callback);
   pinMode(A1, INPUT);
 }
-
 
 void loop() 
 {

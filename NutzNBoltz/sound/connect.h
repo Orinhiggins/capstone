@@ -24,7 +24,9 @@ WiFiClient transport;
 PubSubClient client(transport);
 
 static int status = WL_IDLE_STATUS;
-const int time = 250; //Sample in ms
+
+const int time = INTERVAL; //Sample in ms
+
 unsigned int amp = 0;
 
 void setup_wifi() 
@@ -69,7 +71,7 @@ void reconnect()
     if (client.connect("ESP32")) 
     {
       Serial.println("connected");
-      client.subscribe("esp32/sound");
+      client.subscribe(TOPIC_ROOM);
     } 
     else 
     {
