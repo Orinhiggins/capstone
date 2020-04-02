@@ -22,19 +22,11 @@ void setup()
   Serial.println(VERSION);
 
   setup_wifi();
-<<<<<<< Updated upstream
   client.setServer(mqtt_server, MQTT_SUB_PORT);//
-=======
-  client.setServer(mqtt_server, 1883);
->>>>>>> Stashed changes
   client.setCallback(callback);
   pinMode(A1, INPUT);
 }
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 void loop() 
 {
    if(!client.connected()) 
