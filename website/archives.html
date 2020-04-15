@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/table.css">
+    <script src="js/bootstrap.js"></script>
+    <!-- Function for the filter table -->
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    <title>IoT Archives for Past Readings</title>
+</head>
+<body>
+    <a href="index.html">
+        <img src="images/logo.png" alt="Rovisys" usemap="#homemap" height="75" width="75">
+    </a>
+    <h1>Archives for Past Readings</h1>
+
+    <a href = "index.html"><button type="button" >Live</button></a>
+    <a href = "archives.html"><button type="button">Archives</button></a>
+    <a href = "adminPanel.html"><button type="button">Admin Page</button></a>
+    <br><br><br>
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
+    
+    
+    <!-- Still have to implement a way for the table to pull from db, once connected. -->
+    <table id="myTable">
+        <tr class="header">
+            <th style="width:40%;">Room Number</th>
+            <th style="width:30%;">Date</th>
+            <th style="width:30%;">Readings</th>
+        </tr>
+        <!-- Just dummy data, will be changed out when website is connected to db. -->
+        <tr>
+            <td>1</td>
+            <td>1/11/2020</td>
+            <td>0.0565</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>1/12/2020</td>
+            <td>0.05565</td>
+        </tr>
+
+    </table>
+</body>
+</html>
