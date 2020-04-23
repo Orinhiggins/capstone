@@ -2,8 +2,81 @@
 <html>
     <!-- Need to implement the live feed. Probably the last feature that will be added. -->
     <head>
+        <!--<meta charset="utf-8">
+        <meta name ="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv = "X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href = "rickshaw/tutorial/styles.css">
+        <link rel="stylesheet" type="text/css" href= "rickshaw/rickshaw.min.css">
+        <script src="js/d3.js"></script>
+        <script src="js/d3.min.js"></script>
+        <script src="rickshaw/rickshaw.min.js"></script>-->
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <title>IoT Sound Sensor Live Feed</title>
+        <script>
+            window.onload = function() {
+
+                var dataPoints = [];
+
+                var chart = new CanvasJS.Chart("chartContainer", {
+	                theme: "light2",
+	                title: {
+		            text: "Live Data"
+	                },
+	                data: [{
+		            type: "line",
+		            dataPoints: dataPoints
+	                }]
+                });
+                updateData();
+
+                // Initial Values
+                var xValue = 0;
+                var yValue = 10;
+                var newDataCount = 6;
+
+                function addData(data) {
+	                if(newDataCount != 1) {
+		                $.each(data, function(key, value) {
+			            dataPoints.push({x: value[0], y: parseInt(value[1])});
+			            xValue++;
+			            yValue = parseInt(value[1]);
+		                });
+	                } else {
+		                //dataPoints.shift();
+		                dataPoints.push({x: data[0][0], y: parseInt(data[0][1])});
+		                xValue++;
+		                yValue = parseInt(data[0][1]);
+	                }
+	
+	                newDataCount = 1;
+	                chart.render();
+	                setTimeout(updateData, 1000 );
+                    /*
+                    console.log('*** QUERY ROWS ***')
+
+                    const queryAPI = influxDB.getQueryApi('')
+                    const query = `from(bucket: "${bucket}") |> range(start: -1h)`
+                    queryAPI.queryRows(query, {
+                         next(row, tableMeta) {
+                            const o = tableMeta.toObject(row)
+                            console.log(`${o._time} ${o._measurement} : ${o._field}=${o._value}`)
+                        },
+                        error(error) {
+                            console.error(error)
+                        },
+                        complete() {
+                            console.log('\nFinished')
+                        },
+                    })
+                    */
+                }
+
+                function updateData() {
+	            $.getJSON("https://canvasjs.com/services/data/datapoints.php?xstart="+xValue+"&ystart="+yValue+"&length="+newDataCount+"type=json", addData);
+                }
+
+                }
+        </script>
     </head>
     <body>
         <img src="images/Rovisys.png" alt="Rovisys" height="100" width="350">
@@ -13,11 +86,16 @@
         <a href = "index.html"><button type="button" >Live</button></a>
         <a href = "archives.html"><button type="button">Archives</button></a>
         <a href = "adminPanel.html"><button type="button">Admin Page</button></a>
-        <h2>
-            Lorem Ipsum Dolor
-        </h2>
-        <h3>
-            Lorem Ipsum Dolor
-        </h3>
+
+        <!--<div id="chart-container">
+            <div class="chart-box">
+                <div id="y-axis"></div>
+                <div id="chart"></div>
+            </div>
+        </div>
+        <script type="text/javascript" src="js/scripts.js"></script>-->
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+        <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+        <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
     </body>
 </html>

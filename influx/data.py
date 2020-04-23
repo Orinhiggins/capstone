@@ -6,9 +6,9 @@ from influxdb_client import Point, InfluxDBClient
 from influxdb_client.client.write_api import SYNCHRONOUS
 
 influx_cloud_url = 'https://us-west-2-1.aws.cloud2.influxdata.com'
-influx_cloud_token = 
-bucket = 
-org = 
+influx_cloud_token = '_iuIDTW5tIiQyIHNeU6H8s9Iz8x2NxS8MqV0dHawMoMQOPqn6VYrbj5tlHtK8wVp5S7KfTqI2_Z327xf3M8MVQ=='
+bucket = 'testing'
+org = 'ohiggins@kent.edu'
 kind = 'roomOne'
 ser = serial.Serial('/dev/tty.usbserial-01BE29E7', 9600)
 client = InfluxDBClient(url=influx_cloud_url, token=influx_cloud_token) 
